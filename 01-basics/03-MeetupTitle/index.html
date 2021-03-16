@@ -3,11 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>MeetupTitle</title>
+  <style>
+    ul {
+      list-style: none;
+    }
+    .container {
+      display: flex;
+    }
+  </style>
 </head>
 <body>
-
-<!-- Решение -->
-
-<script type="module" src="script.js"></script>
+<div id="app">
+  <!-- Решение -->
+  <div class="container">
+    <span v-for="item  in meetups">
+      <input name="list" type="radio" :id="item.id" :value="item.title" v-model="active">
+      <label :for="item.id">{{item.id}}</label>
+    </span>
+  </div>
+  <hr>
+ <span>{{ active }}</span>
+</div>
+<script type="module" src="script.js "></script>
 </body>
 </html>
