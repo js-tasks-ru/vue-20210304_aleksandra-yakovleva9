@@ -37,6 +37,15 @@ const app = new Vue({
       search: null,
     };
   },
+
+  computed: {
+    emails() {
+      return this.emailsList.map((email) => ({
+        email,
+        markedEmail: email.includes(this.search),
+      }));
+    },
+  },
 });
 
 app.$mount('#app');

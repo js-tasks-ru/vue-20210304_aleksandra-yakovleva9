@@ -14,8 +14,9 @@
 <div id="app">
   <input type="text" v-model="search"/>
   <ul>
-    <li v-for="item in emailsList" :class="{ 'marked': item.includes(search)}">
-      {{ item }}
+    <li v-for="item in emails" :class="{'marked' : item.markedEmail }">
+      {{ item.email }}
+      <br>
     </li>
   </ul>
 </div>
