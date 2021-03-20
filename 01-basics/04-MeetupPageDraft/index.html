@@ -32,7 +32,7 @@
               </div>
               <div class="meetup-agenda__item-col">{{ agenda.startsAt }} - {{ agenda.endsAt }}</div>
               <div class="meetup-agenda__item-col">
-                <h5 class="meetup-agenda__title">{{ agenda.title !== null ? agenda.title : getAgenda(agenda.type, agendaTitles) }}</h5>
+                <h5 class="meetup-agenda__title">{{ meetup.agendaTitle }}</h5>
                 <template v-if="agenda.type === 'talk'">
                   <p><span>{{agenda.speaker}}</span><span class="meetup-agenda__dot"></span><span class="meetup-agenda__lang">{{ agenda.language}}</span></p>
                   <p>{{ agenda.description }}</p>

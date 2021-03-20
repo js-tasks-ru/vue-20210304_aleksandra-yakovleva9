@@ -74,6 +74,10 @@ const app = new Vue({
             }
           : undefined,
 
+        agendaTitle: function () {
+            return
+        },
+
         localDate: new Date(this.rawMeetup.date).toLocaleString(navigator.language, {
           year: 'numeric',
           month: 'long',
