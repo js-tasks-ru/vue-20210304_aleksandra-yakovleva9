@@ -42,40 +42,51 @@ const getAgendaItemIcons = () => ({
   closing: 'key',
   afterparty: 'cal-sm',
   other: 'cal-sm',
+  test: 'test',
 });
 
-const fetchMeetups = () => fetch('../api/meetups.json').then((res) => res.json());
+function fetchMeetup() {
+  return fetch(`${API_URL}/meetups/${MEETUP_ID}`).then((res) => res.json());
+}
 
 const app = new Vue({
   data() {
     return {
-      rawMeetups: [], // поменять на null
+      rawMeetup: null,
+      agendaTitles: getAgendaItemDefaultTitles(),
+      agendaIcons: getAgendaItemIcons(),
+      iconLink: '',
+      getAgenda: function (type, agendaList) {
+        return agendaList[type];
+      },
     };
   },
 
   computed: {
-    meetups() {
-      return this.rawMeetups.map((meetup) => ({
-        ...meetup,
-        coverStyle: meetup.imageId
+    meetup() {
+      if (!this.rawMeetup) {
+        return null;
+      }
+      return {
+        ...this.rawMeetup,
+        coverStyle: this.rawMeetup.imageId
           ? {
-              '--bg-url': `url(https://course-vue.javascript.ru/api/images/${meetup.imageId})`,
+              '--bg-url': `url(https://course-vue.javascript.ru/api/images/${this.rawMeetup.imageId})`,
             }
           : undefined,
-        localDate: new Date(meetup.date).toLocaleString(navigator.language, {
+
+        localDate: new Date(this.rawMeetup.date).toLocaleString(navigator.language, {
           year: 'numeric',
           month: 'long',
           day: 'numeric',
         }),
-        dateOnlyString: new Date(meetup.date).toISOString().split('T')[0],
-        agendaTitle: meetup.agenda,
-      }));
+      };
     },
   },
 
   mounted() {
-    fetchMeetups().then((meetups) => {
-      this.rawMeetups = meetups;
+    fetchMeetup().then((meetup) => {
+      this.rawMeetup = meetup;
     });
   },
 });
