@@ -16,13 +16,17 @@
 <div id="app">
   <!-- Решение -->
   <div class="container">
-    <span v-for="item  in meetups">
-      <input name="list" type="radio" :id="item.id" :value="item.title" v-model="active">
-      <label :for="item.id">{{item.id}}</label>
-    </span>
+    <label v-for=" index in 5">
+    <input name="radiolist" type="radio" @input="getId"/>
+      <span>{{index}}</span>
+    </label>
   </div>
   <hr>
- <span>{{ active }}</span>
+ <span>{{ meetup.id }}</span>
+  <br>
+  <span>{{ meetup.title }}</span>
+  <br>
+  <button @click="getId">{{id}}</button>
 </div>
 <script type="module" src="script.js "></script>
 </body>
