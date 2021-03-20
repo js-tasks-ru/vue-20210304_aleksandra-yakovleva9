@@ -42,7 +42,6 @@ const getAgendaItemIcons = () => ({
   closing: 'key',
   afterparty: 'cal-sm',
   other: 'cal-sm',
-  test: 'test',
 });
 
 function fetchMeetup() {
