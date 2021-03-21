@@ -54,10 +54,6 @@ const app = new Vue({
       rawMeetup: null,
       agendaTitles: getAgendaItemDefaultTitles(),
       agendaIcons: getAgendaItemIcons(),
-      iconLink: '',
-      getAgenda: function (type, agendaList) {
-        return agendaList[type];
-      },
     };
   },
 
@@ -74,7 +70,6 @@ const app = new Vue({
             }
           : undefined,
 
-        agendaTitle: this.test(),
         localDate: new Date(this.rawMeetup.date).toLocaleString(navigator.language, {
           year: 'numeric',
           month: 'long',
@@ -88,18 +83,6 @@ const app = new Vue({
     fetchMeetup().then((meetup) => {
       this.rawMeetup = meetup;
     });
-  },
-
-  methods: {
-    test: function () {
-      const newArr = [];
-      const arr = Object.values(this.rawMeetup.agenda);
-      const values = Object.values(this.rawMeetup.agenda);
-      for (let i = 0; i < arr.length; i++ ) {
-          newArr.push(values[i].title)
-      }
-      return newArr;
-    },
   },
 });
 
