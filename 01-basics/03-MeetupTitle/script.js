@@ -1,14 +1,14 @@
 import Vue from './vendor/vue.esm.browser.js';
 
-function fetchMeetup(id) {
-  return fetch(`https://course-vue.javascript.ru/api/meetups/${id}`).then((res) => res.json());
+function fetchMeetup(idMeetup) {
+  return fetch(`https://course-vue.javascript.ru/api/meetups/${idMeetup}`).then((res) => res.json());
 }
 
 const app = new Vue({
   data() {
     return {
-      rawMeetup: [],
-      id: 3,
+      rawMeetup: null,
+      idMeetup: 3,
     };
   },
 
@@ -19,19 +19,13 @@ const app = new Vue({
       }
       return {
         ...this.rawMeetup,
-        id: this.rawMeetup = 5,
+        idMeetup: 4,
       };
     },
   },
 
-  methods: {
-    getId () {
-      return this.id = this.rawMeetup.id;
-    }
-  },
-
   mounted() {
-    fetchMeetup(this.id).then((meetup) => {
+    fetchMeetup(this.idMeetup).then((meetup) => {
       this.rawMeetup = meetup;
     });
   },
