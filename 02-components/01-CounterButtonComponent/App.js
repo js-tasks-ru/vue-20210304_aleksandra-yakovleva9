@@ -1,9 +1,9 @@
-import { CounterButton } from './components/CounterButton.js';
+import { CounterButton } from './components/CounterButtonComponent/CounterButton.js';
 
 export const App = {
   name: 'App',
   template: `<main id="app">
-    <counter-button  v-on:counterUp />
+    <counter-button :count.sync="count"/>
   </main>`,
   components: { CounterButton },
   data() {
@@ -11,7 +11,4 @@ export const App = {
       count: 0,
     };
   },
-  updateTitle(updatedTitle){
-    this.title = updatedTitle;
-  }
-}
+};
