@@ -44,4 +44,46 @@ const getAgendaItemIcons = () => ({
   other: 'cal-sm',
 });
 
-new Vue();
+function fetchMeetup() {
+  return fetch(`${API_URL}/meetups/${MEETUP_ID}`).then((res) => res.json());
+}
+
+const app = new Vue({
+  data() {
+    return {
+      rawMeetup: null,
+      agendaTitles: getAgendaItemDefaultTitles(),
+      agendaIcons: getAgendaItemIcons(),
+    };
+  },
+
+  computed: {
+    meetup() {
+      if (!this.rawMeetup) {
+        return null;
+      }
+      return {
+        ...this.rawMeetup,
+        coverStyle: this.rawMeetup.imageId
+          ? {
+              '--bg-url': `url(https://course-vue.javascript.ru/api/images/${this.rawMeetup.imageId})`,
+            }
+          : undefined,
+
+        localDate: new Date(this.rawMeetup.date).toLocaleString(navigator.language, {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        }),
+      };
+    },
+  },
+
+  mounted() {
+    fetchMeetup().then((meetup) => {
+      this.rawMeetup = meetup;
+    });
+  },
+});
+
+app.$mount('#app');
