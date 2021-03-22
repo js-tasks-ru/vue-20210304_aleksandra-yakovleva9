@@ -8,17 +8,16 @@ export const CounterButton = {
   // Шаблон лучше держать максимально простым, а логику выносить в методы
 
   // Шаблон потребуется отредактировать
-  template: `<button type="button" @click="counterUp">{{counter}}</button>`,
+  template: `<button type="button" @click="$emit('counterUp', 'newCount')">{{ count }}</button>`,
   props: {
-    counter: {
-      type: Number,
-      default: 0,
+    count: {
+      type: String,
+      default: "Test",
     },
   },
   methods: {
-    counterUp() {
-      return this.$emit('counter-up', this.counter++);
-    },
-  },
-
+    changeCount(count) {
+      console.log(count);
+    }
+  }
 };

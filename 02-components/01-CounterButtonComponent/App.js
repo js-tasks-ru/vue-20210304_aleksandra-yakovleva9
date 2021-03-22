@@ -1,14 +1,17 @@
-import { CounterButton } from './VCounterButton.js';
+import { CounterButton } from './components/CounterButton.js';
 
 export const App = {
   name: 'App',
   template: `<main id="app">
-    <counter-button :counter="counter" @counter-up="counter = $event"/>
+    <counter-button  v-on:counterUp />
   </main>`,
   components: { CounterButton },
   data() {
     return {
-      counter: 0,
+      count: 0,
     };
   },
+  updateTitle(updatedTitle){
+    this.title = updatedTitle;
+  }
 }
