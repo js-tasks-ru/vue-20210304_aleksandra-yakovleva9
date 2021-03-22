@@ -8,7 +8,7 @@ const app = new Vue({
   data() {
     return {
       rawMeetup: null,
-      idMeetup: 3,
+      idMeetup: null,
     };
   },
 

@@ -15,17 +15,19 @@
 <body>
 <div id="app">
   <!-- Решение -->
-  <div class="container">
-    <label v-for=" index in 5">
-    <input name="radiolist" type="radio" @input="getId"/>
-      <span>{{index}}</span>
-    </label>
-  </div>
-  <hr>
- <span>{{ meetup.id }}</span>
-  <br>
-  <span>{{ meetup.title }}</span>
-  <br>
+  <template v-if="rawMeetup">
+    <div class="container">
+      <label v-for=" index in 5">
+        <input name="radiolist" type="radio"/>
+        <span>{{index}}</span>
+      </label>
+    </div>
+    <hr>
+    <span>{{ meetup.idMeetup }}</span>
+    <br>
+    <span>{{ meetup.title }}</span>
+    <br>
+  </template>
 </div>
 <script type="module" src="script.js "></script>
 </body>
