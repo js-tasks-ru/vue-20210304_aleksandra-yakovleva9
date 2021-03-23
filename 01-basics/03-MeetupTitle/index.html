@@ -18,7 +18,7 @@
   <template v-if="rawMeetup">
     <div class="container">
       <label v-for=" index in 5">
-        <input name="radiolist" type="radio"/>
+        <input name="radiolist" type="radio"  :checked="meetup.activeId"/>
         <span>{{index}}</span>
       </label>
     </div>

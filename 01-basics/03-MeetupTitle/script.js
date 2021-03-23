@@ -1,7 +1,7 @@
 import Vue from './vendor/vue.esm.browser.js';
 
-function fetchMeetup(idMeetup) {
-  return fetch(`https://course-vue.javascript.ru/api/meetups/${idMeetup}`).then((res) => res.json());
+function fetchMeetup() {
+  return fetch(`https://course-vue.javascript.ru/api/meetups/${4}`).then((res) => res.json());
 }
 
 const app = new Vue({
@@ -9,7 +9,12 @@ const app = new Vue({
     return {
       rawMeetup: null,
       idMeetup: null,
+      activeId: 3,
     };
+  },
+
+  watch: {
+
   },
 
   computed: {
@@ -19,7 +24,6 @@ const app = new Vue({
       }
       return {
         ...this.rawMeetup,
-        idMeetup: 4,
       };
     },
   },
