@@ -3,11 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <title>MeetupTitle</title>
+  <style>
+    ul {
+      list-style: none;
+    }
+    .container {
+      display: flex;
+    }
+  </style>
 </head>
 <body>
-
-<!-- Решение -->
-
-<script type="module" src="script.js"></script>
+<div id="app">
+  <!-- Решение -->
+  <template>
+    <div class="container">
+      <label v-for=" (item, index) in 5">
+        <input name="radiolist"
+               type="radio"
+               :id="item"
+               :value="item"
+               v-model="activeId"
+        />
+        <span>{{ item }}</span>
+      </label>
+    </div>
+    <hr>
+    <span v-model="rawMeetup">{{ rawMeetup }}</span>
+    <br>
+  </template>
+</div>
+<script type="module" src="script.js "></script>
 </body>
 </html>
