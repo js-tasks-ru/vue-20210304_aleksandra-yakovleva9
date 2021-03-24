@@ -1,8 +1,25 @@
 export default {
   name: 'MeetupCover',
+  data() {
+    return {
+      coverStyle:
+        this.link !== null
+          ? {
+              '--bg-url': `url('${this.link}')`,
+            }
+          : undefined,
+    };
+  },
 
+  props: {
+    link: {
+      type: String,
+      default: null,
+    },
+    title: String,
+  },
   template: `
-    <div class="meetup-cover" style="--bg-url: url('https://course-vue.javascript.ru/api/images/2')">
-        <h1 class="meetup-cover__title">Title</h1>
+    <div class="meetup-cover" :style="coverStyle">
+        <h1 class="meetup-cover__title">{{ title }}</h1>
     </div>`,
 };
