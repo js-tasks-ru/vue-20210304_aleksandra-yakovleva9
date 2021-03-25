@@ -6,7 +6,7 @@ export default {
   props: {
     agenda: {
       type: Array,
-      default: [],
+      default: () => [],
     },
   },
   components: { MeetupAgendaItem },

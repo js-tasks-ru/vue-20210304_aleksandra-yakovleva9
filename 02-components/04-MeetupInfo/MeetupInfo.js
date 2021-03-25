@@ -14,16 +14,16 @@ export default {
       required: true,
     },
   },
-  methods: {
-    localDate(dateValue) {
-      return new Date(dateValue).toLocaleString(navigator.language, {
+  computed: {
+    localDate() {
+      return this.date.toLocaleString(navigator.language, {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
       });
     },
-    dateOnlyString(dateString){
-      return new Date(dateString).toISOString().split('T')[0]
+    localDateString() {
+      return this.date.toISOString().split('T')[0];
     },
   },
   template: `
@@ -38,7 +38,7 @@ export default {
       </li>
       <li>
         <img class="icon info-list__icon" alt="icon" src="/assets/icons/icon-cal-lg.svg" />
-        <time :datetime="dateOnlyString(date)">{{ localDate(date) }}</time>
+        <time :datetime="localDateString">{{ localDate }}</time>
       </li>
     </ul>`,
 };

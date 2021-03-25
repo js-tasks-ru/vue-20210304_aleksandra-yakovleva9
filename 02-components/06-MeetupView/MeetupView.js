@@ -6,10 +6,10 @@ import { getImageUrlByImageId } from './data.js';
 
 export default {
   name: 'MeetupView',
-  data() {
-    return {
-      imageId: getImageUrlByImageId(this.meetup.imageId),
-    };
+  computed: {
+    imageId() {
+      return getImageUrlByImageId(this.meetup.imageId);
+    },
   },
   props: {
     meetup: {
