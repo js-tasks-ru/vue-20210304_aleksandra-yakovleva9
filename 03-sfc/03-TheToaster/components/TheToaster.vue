@@ -15,14 +15,14 @@ export default {
   data() {
     return {
       toasterList: [],
-      addItem: () => {},
+      addItem: () => ({}),
     };
   },
 
   methods: {
     error(message) {
       this.addItem = {};
-      this.$parent.$on('error', (this.addItem.message = message));
+      this.addItem.message = message;
       this.addItem.status = 'error';
       this.toasterList.push(this.addItem);
       setTimeout(() => this.toasterList.shift(this.addItem), DELAY);
@@ -30,8 +30,8 @@ export default {
 
     success(message) {
       this.addItem = {};
-      this.$parent.$on('success', (this.addItem.message = message));
       this.addItem.status = 'success';
+      this.addItem.message = message;
       this.toasterList.push(this.addItem);
       setTimeout(() => this.toasterList.shift(this.addItem), DELAY);
     },
