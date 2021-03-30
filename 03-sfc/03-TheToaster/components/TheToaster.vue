@@ -1,35 +1,40 @@
 <template>
   <div class="toasts">
-    <div class="toast toast_success">
-      <app-icon icon="check-circle" />
-      <span>Success 1</span>
-    </div>
-    <div class="toast toast_success">
-      <app-icon icon="check-circle" />
-      <span>Success 2</span>
-    </div>
-    <!-- ... -->
-    <div class="toast toast_error">
-      <app-icon icon="alert-circle" />
-      <span>Error 1</span>
-    </div>
+    <toaster-item v-for="item in toasterList" :key="item.id" :toaster-item="item" />
   </div>
 </template>
 
-<script>
-import AppIcon from './AppIcon';
+<script type="module">
+import ToasterItem from './ToasterItem';
 
 const DELAY = 5000;
 
 export default {
   name: 'TheToaster',
-
-  components: { AppIcon },
+  components: { ToasterItem },
+  data() {
+    return {
+      toasterList: [],
+      addItem: () => {},
+    };
+  },
 
   methods: {
-    error(message) {},
+    error(message) {
+      this.addItem = {};
+      this.$parent.$on('error', (this.addItem.message = message));
+      this.addItem.status = 'error';
+      this.toasterList.push(this.addItem);
+      setTimeout(() => this.toasterList.shift(this.addItem), DELAY);
+    },
 
-    success(message) {},
+    success(message) {
+      this.addItem = {};
+      this.$parent.$on('success', (this.addItem.message = message));
+      this.addItem.status = 'success';
+      this.toasterList.push(this.addItem);
+      setTimeout(() => this.toasterList.shift(this.addItem), DELAY);
+    },
   },
 };
 </script>
