@@ -1,37 +1,43 @@
-<template>
-  <div class="form-group">
-    <label class="form-label">Label</label>
-    <!-- <input /> -->
+<template v-slot>
+  <div class="form-group" :class="{ 'form-group_inline': inline }">
+    <label class="form-label" v-if="label" :label="label">{{ label }}</label>
+    <slot>
+      <input />
+    </slot>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'FormGroup',
-};
+  export default {
+    name: 'FormGroup',
+    props: {
+      inline: {
+        type: Boolean,
+        default: false,
+      },
+      label: String,
+    },
+  };
 </script>
 
 <style scoped>
-.form-group {
-  position: relative;
-  margin-bottom: 24px;
-}
-
-.form-group.form-group_inline {
-  display: inline-block;
-  margin-bottom: 0;
-}
-
-.form-group.form-group_inline + .form-group.form-group_inline {
-  margin-left: 16px;
-}
-
-.form-label {
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 28px;
-  color: var(--body-color);
-  margin-bottom: 10px;
-  display: block;
-}
+  .form-group {
+    position: relative;
+    margin-bottom: 24px;
+  }
+  .form-group.form-group_inline {
+    display: inline-block;
+    margin-bottom: 0;
+  }
+  .form-group.form-group_inline + .form-group.form-group_inline {
+    margin-left: 16px;
+  }
+  .form-label {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 28px;
+    color: var(--body-color);
+    margin-bottom: 10px;
+    display: block;
+  }
 </style>

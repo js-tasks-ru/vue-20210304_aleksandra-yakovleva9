@@ -1,23 +1,27 @@
 <template>
   <div class="dropdown" :class="{ show: listOpen }" @click="listOpen = !listOpen">
-    <button type="button" class="button dropdown__toggle dropdown__toggle_icon" :value="selectItem.value">
-      <app-icon :icon="selectItem.icon" />
-      {{ title }} - {{ selectItem }}
+    <button
+      type="button"
+      class="button dropdown__toggle"
+      :class="{ dropdown__toggle_icon: selectedItem['icon'] }"
+      :value="selectedItem.value"
+    >
+      <app-icon v-if="selectedItem.icon !== undefined" :icon="selectedItem.icon" />
+      {{ title }}
     </button>
-    <br>
-    item: {{selectItem.item }}
-    <br>
 
     <div class="dropdown__menu" :class="{ show: listOpen }">
       <button
-        v-for="item in options"
-        :key="item.key"
-        class="dropdown__item dropdown__item_icon"
+        v-for="option in options"
+        :key="option.value"
+        class="dropdown__item"
+        :class="{ dropdown__item_icon: isIcons }"
         type="button"
-        @click="change = item"
+        :value="option.value"
+        @click="change(option)"
       >
-        <app-icon v-if="item.icon" :icon="[item.icon]" />
-        {{ item.text }}
+        <app-icon v-if="option.icon !== undefined" :icon="option.icon" />
+        {{ option.text }}
       </button>
       <!-- ... -->
     </div>
@@ -30,6 +34,11 @@ import AppIcon from './AppIcon';
 export default {
   name: 'DropdownButton',
   components: { AppIcon },
+  model: {
+    prop: 'value',
+    event: 'change',
+  },
+
   props: {
     title: {
       type: String,
@@ -39,27 +48,45 @@ export default {
     options: {
       type: Array,
       required: true,
-      default: () => [{}, {}, {}],
     },
 
-    value: {
-      type: String,
-      required: true,
-    },
+    value: {},
   },
 
   data() {
     return {
       listOpen: false,
-      change: null,
+      isIcons: false,
+      selected: () => ({}),
     };
   },
 
   computed: {
-    selectItem() {
+    selectedItem() {
+      if (this.selected.icon !== undefined) {
+        return {
+          icon: this.selected.icon,
+          value: this.selected.value,
+        };
+      }
+
       return {
-        item: this.change,
+        value: this.selected.value,
       };
+    },
+  },
+
+  created() {
+    console.log(Object.values(this.options));
+    // for(var key in this.options) {
+    //   console.log(key);
+    // }
+  },
+
+  methods: {
+    change(option) {
+      this.$emit('change', option.value);
+      this.selected = option;
     },
   },
 };
