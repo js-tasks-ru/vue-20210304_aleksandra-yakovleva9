@@ -1,16 +1,20 @@
 <template>
   <div class="content-tabs">
     <div class="content-tabs__nav">
-      <a href="#" class="content-tabs__tab">Page A</a>
-      <a href="#" class="content-tabs__tab">Page B</a>
+      <router-link v-for="link in tabs" :key="link.index" class="content-tabs__tab" active-class="content-tabs__tab_active" :to="link.to">
+        {{ link.text }}</router-link
+      >
     </div>
-    <div class="content-tabs__content">View Content From Slot</div>
+    <div class="content-tabs__content"><router-view :prop="tabs"/></div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'ContentTabs',
+  props: {
+    tabs: Array,
+  },
 };
 </script>
 
