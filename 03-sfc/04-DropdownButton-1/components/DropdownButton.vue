@@ -77,10 +77,14 @@ export default {
   },
 
   created() {
-    console.log(Object.values(this.options));
-    // for(var key in this.options) {
-    //   console.log(key);
-    // }
+    // console.log(Object.values(this.options));
+    function getValue(array, value) {
+      var object = array.filter(function(arr, i){
+        return this.options.key === value ? arr.value : '';
+      });
+      return object;
+    }
+    console.log(getValue(this.options, "слово2"));
   },
 
   methods: {
