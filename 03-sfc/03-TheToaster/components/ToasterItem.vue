@@ -1,4 +1,3 @@
-
 <template>
   <div
     class="toast"
@@ -21,4 +20,5 @@
     },
   };
 </script>
+
 
