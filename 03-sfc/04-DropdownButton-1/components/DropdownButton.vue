@@ -3,11 +3,11 @@
     <button
       type="button"
       class="button dropdown__toggle"
-      :class="{ 'dropdown__toggle_icon': isIcons }"
+      :class="{ dropdown__toggle_icon: isIcon }"
       :value="selectedItem.value"
     >
       <app-icon v-if="selectedItem.icon !== undefined" :icon="selectedItem.icon" />
-       {{ selectedItem.text }}
+      {{ selectedItem.text }}
     </button>
 
     <div class="dropdown__menu" :class="{ show: listOpen }">
@@ -15,7 +15,7 @@
         v-for="option in options"
         :key="option.value"
         class="dropdown__item"
-        :class="{ 'dropdown__item_icon': isIcons }"
+        :class="{ dropdown__item_icon: isIcon }"
         type="button"
         :value="option.value"
         @click="change(option)"
@@ -56,33 +56,35 @@ export default {
   data() {
     return {
       listOpen: false,
-      isIcons: false,
-      selected: () => ({}),
     };
   },
 
   computed: {
-    selectedItem() {
+    optionItem() {
       return {
-        icon: this.selected.icon,
-        value: this.selected.value,
-        text: this.selected.value !== undefined ? this.title + ' - ' + this.selected.text : this.title,
+        ...this.options.filter((el) => el.value === this.value),
       };
     },
-  },
 
-  created() {
-    let optionsString = JSON.stringify(this.options);
-
-    if (optionsString.includes('icon')) {
-      return (this.isIcons = true);
-    }
+    selectedItem() {
+      if (this.value === undefined) {
+        return {
+          text: this.title,
+        };
+      }
+      return {
+        text: this.title + ' - ' + this.optionItem[0].text,
+        icon: this.optionItem[0].icon,
+      };
+    },
+    isIcon() {
+      return this.options.filter((el) => el.icon).length > 0;
+    },
   },
 
   methods: {
     change(option) {
       this.$emit('change', option.value);
-      this.selected = option;
     },
   },
 };
