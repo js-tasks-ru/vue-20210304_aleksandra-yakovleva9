@@ -5,7 +5,7 @@
         {{ link.text }}</router-link
       >
     </div>
-    <div class="content-tabs__content"><router-view :prop="tabs"/></div>
+    <div class="content-tabs__content"><slot /></div>
   </div>
 </template>
 

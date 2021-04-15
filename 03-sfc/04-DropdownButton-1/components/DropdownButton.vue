@@ -61,9 +61,7 @@ export default {
 
   computed: {
     optionItem() {
-      return {
-        ...this.options.filter((el) => el.value === this.value),
-      };
+      return this.options.find((el) => el.value === this.value);
     },
 
     selectedItem() {
@@ -73,12 +71,12 @@ export default {
         };
       }
       return {
-        text: this.title + ' - ' + this.optionItem[0].text,
-        icon: this.optionItem[0].icon,
+        text: this.title + ' - ' + this.optionItem.text,
+        icon: this.optionItem.icon,
       };
     },
     isIcon() {
-      return this.options.filter((el) => el.icon).length > 0;
+      return this.options.some((el) => el.icon);
     },
   },
 
