@@ -65,7 +65,7 @@ export default {
     },
 
     selectedItem() {
-      if (this.value === undefined) {
+      if (this.optionItem === undefined) {
         return {
           text: this.title,
         };
