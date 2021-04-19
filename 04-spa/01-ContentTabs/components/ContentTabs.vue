@@ -1,7 +1,7 @@
 <template>
   <div class="content-tabs">
     <div class="content-tabs__nav">
-      <router-link v-for="link in tabs" :key="link.index" class="content-tabs__tab" active-class="content-tabs__tab_active" :to="link.to">
+      <router-link v-for="link in tabs" :key="link.key" class="content-tabs__tab" active-class="content-tabs__tab_active" :to="link.to">
         {{ link.text }}</router-link
       >
     </div>
