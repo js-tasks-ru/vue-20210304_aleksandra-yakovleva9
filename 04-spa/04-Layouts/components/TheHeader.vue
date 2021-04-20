@@ -8,9 +8,9 @@
       </h1>
     </div>
     <nav>
-      <a href="login.html">Вход</a>
-      <a href="register.html">Регистрация</a>
-      <a href="meetup-form.html">Создать митап</a>
+      <router-link :to="{ name: 'meetups' }">Митапы</router-link> |
+      <router-link :to="{ name: 'form' }">Создать митап</router-link> |
+      <router-link :to="{ name: 'login' }">Вход</router-link>
     </nav>
   </header>
 </template>
