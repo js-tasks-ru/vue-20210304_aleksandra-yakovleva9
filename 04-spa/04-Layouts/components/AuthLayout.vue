@@ -1,8 +1,10 @@
 <template>
-  <section class="page page_onboarding">
-    <h2>{{ title }}</h2>
-    <slot />
-  </section>
+  <div class="page page_onboarding">
+    <div class="container">
+      <h1 class="page__title text-center">Вход</h1>
+      <slot />
+    </div>
+  </div>
 </template>
 <script>
 export default {

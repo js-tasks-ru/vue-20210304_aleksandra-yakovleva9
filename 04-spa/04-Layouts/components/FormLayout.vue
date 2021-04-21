@@ -1,8 +1,10 @@
 <template>
-  <section class="page page_meetup-forms">
-    <h2>{{ title }}</h2>
+  <div class="page page_meetup-forms">
+    <div class="container">
+      <h2 class="page__title">Редактирование митапа</h2>
     <slot />
-  </section>
+    </div>
+  </div>
 </template>
 
 <script>
