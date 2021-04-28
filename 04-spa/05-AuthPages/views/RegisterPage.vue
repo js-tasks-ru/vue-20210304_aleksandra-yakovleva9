@@ -38,8 +38,7 @@
 </template>
 
 <script>
-import { register } from '../data';
-
+// import { register } from '../data';
 
 export default {
   name: 'RegisterPage',
@@ -53,19 +52,19 @@ export default {
       },
     };
   },
+
   methods: {
     submit() {
 
-      // получаем данные формв
-      const email = this.userItem.email;
-      const fullname = this.userItem.fullname;
-      const password = this.userItem.password;
-
-      // обрабатываем объект
-       const result = register(email, fullname, password);
-
-       //приходит [object Promise]
-       alert(result);
+      // return new Promise((resolve, reject) => {
+      //
+      //   console.log(func);
+      //   if (resolve) {
+      //     alert('Успех');
+      //   } else if(reject){
+      //     alert('Проал');
+      //   }
+      // });
     },
   },
 };
