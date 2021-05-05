@@ -59,12 +59,12 @@ export default {
         });
       }
 
-      async function resultFunc() {
+      function resultFunc() {
         try {
-          await getEmail(email);
-          await getPassword(password);
+          getEmail(email);
+          getPassword(password);
           return login(email, password).then((res) => {
-            if(res.message !== undefined) {
+            if (res.message !== undefined) {
               return alert(res.message);
             }
             return alert(res.fullname);

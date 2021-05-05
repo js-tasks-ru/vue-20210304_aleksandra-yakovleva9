@@ -44,15 +44,15 @@ import { register } from '../data';
 
 export default {
   name: 'RegisterPage',
-
-  beforeRouteEnter(to, from, next) {
-    if (from.name === 'register' && to.name === 'login' && window.alert(!this.userItem.id)) {
-      console.log('переход не получился');
-      next(false);
-    }
-    next();
-    console.log('переход получился');
-  },
+  //
+  // beforeRouteEnter(to, from, next) {
+  //   if (from.name === 'register' && to.name === 'login' && window.alert(!this.userItem.id)) {
+  //     console.log('переход не получился');
+  //     next(false);
+  //   }
+  //   next();
+  //   console.log('переход получился');
+  // },
 
   data() {
     return {
@@ -74,7 +74,9 @@ export default {
       const checkPassword = this.userItem.checkPassword;
       const accepted = this.userItem.accepted;
 
-      this.$router.push('login');
+      if (window.alert(!this.userItem.id)) {
+        this.$router.push('login');
+      }
 
       function getEmail(email) {
         return new Promise((resolve, reject) => {
