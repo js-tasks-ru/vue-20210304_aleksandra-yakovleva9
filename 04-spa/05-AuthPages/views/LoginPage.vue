@@ -41,41 +41,32 @@ export default {
       const email = this.userItem.email;
       const password = this.userItem.password;
 
-      function getEmail(email) {
-        return new Promise((resolve, reject) => {
-          if (email.length > 0) {
-            resolve();
-          }
-          reject('Требуется ввести Email');
-        });
-      }
-
-      function getPassword(password) {
-        return new Promise((resolve, reject) => {
-          if (password !== '') {
-            resolve();
-          }
-          reject('Требуется ввести пароль');
-        });
-      }
-
-      function resultFunc() {
-        try {
-          getEmail(email);
-          getPassword(password);
-          return login(email, password).then((res) => {
-            if (res.message !== undefined) {
-              return alert(res.message);
-            }
-            return alert(res.fullname);
-          });
-        } catch (err) {
-          return alert(err);
+      function validForm(email, password) {
+        if (email === '') {
+          alert('Требуется ввести Email');
+          return false;
         }
+        if (email !== '' && password === '') {
+          alert('Требуется ввести пароль');
+          return false;
+        }
+        return true;
       }
-      resultFunc().then((res) => {
-        return res;
-      });
+
+      if (validForm(email, password)) {
+        login(email, password).then((res) => {
+          if (res.message !== undefined) {
+            alert(res.message);
+            return false;
+          }
+          alert(res.fullname);
+          if(this.$route.query.from === undefined) {
+            this.$router.push('/');
+            return false;
+          }
+          this.$router.push(this.$route.query.from);
+        });
+      }
     },
   },
 };

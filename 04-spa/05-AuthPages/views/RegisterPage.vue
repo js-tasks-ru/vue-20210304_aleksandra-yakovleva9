@@ -44,15 +44,6 @@ import { register } from '../data';
 
 export default {
   name: 'RegisterPage',
-  //
-  // beforeRouteEnter(to, from, next) {
-  //   if (from.name === 'register' && to.name === 'login' && window.alert(!this.userItem.id)) {
-  //     console.log('переход не получился');
-  //     next(false);
-  //   }
-  //   next();
-  //   console.log('переход получился');
-  // },
 
   data() {
     return {
@@ -74,79 +65,40 @@ export default {
       const checkPassword = this.userItem.checkPassword;
       const accepted = this.userItem.accepted;
 
-      if (window.alert(!this.userItem.id)) {
-        this.$router.push('login');
-      }
-
-      function getEmail(email) {
-        return new Promise((resolve, reject) => {
-          if (email.length > 0) {
-            resolve();
-          }
-          reject('Требуется ввести Email');
-        });
-      }
-
-      function getFullname(fullname) {
-        return new Promise((resolve, reject) => {
-          if (fullname.length > 0) {
-            resolve();
-          }
-          reject('Требуется ввести полное имя');
-        });
-      }
-
-      function getPassword(password) {
-        return new Promise((resolve, reject) => {
-          if (password.length > 0) {
-            resolve();
-          }
-          reject('Требуется ввести пароль');
-        });
-      }
-
-      function getCheckPassword(password, checkPassword) {
-        return new Promise((resolve, reject) => {
-          if (password === checkPassword) {
-            resolve();
-          }
-          reject('Пароли не совпадают');
-        });
-      }
-
-      function getAccepted(accepted) {
-        return new Promise((resolve, reject) => {
-          if (accepted) {
-            resolve();
-          }
-          reject('Требуется согласиться с условиями');
-        });
-      }
-
-      async function resultFunc() {
-        try {
-          await getEmail(email);
-          await getFullname(fullname);
-          await getPassword(password);
-          await getCheckPassword(password, checkPassword);
-          await getAccepted(accepted);
-
-          return register(email, fullname, password).then((res) => {
-            if (res.message !== undefined) {
-              // this.$router.push('login');
-              return alert(res.message);
-            }
-
-            return alert(res.id);
-          });
-        } catch (err) {
-          return alert(err);
+      function validForm(email, fullname, password, checkPassword, accepted) {
+        if (email === '') {
+          alert('Требуется ввести Email');
+          return false;
         }
+
+        if (fullname === '') {
+          alert('Требуется ввести полное имя');
+          return false;
+        }
+        if (password === '') {
+          alert('Требуется ввести пароль');
+          return false;
+        }
+        if (checkPassword !== password) {
+          alert('Пароли не совпадают');
+          return false;
+        }
+        if (accepted === false) {
+          alert('Требуется согласиться с условиями');
+          return false;
+        }
+        return true;
       }
 
-      resultFunc().then((res) => {
-        return res;
-      });
+      if (validForm(email, fullname, password, checkPassword, accepted)) {
+        register(email, fullname, password).then((res) => {
+          if (res.message !== undefined) {
+            return alert(res.message);
+          }
+          alert(res.id);
+          this.$router.push('login');
+        });
+      }
     },
   },
 };
