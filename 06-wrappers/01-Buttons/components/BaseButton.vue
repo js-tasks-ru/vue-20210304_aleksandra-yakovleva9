@@ -1,10 +1,20 @@
 <template>
-  <button type="button" class="button"></button>
+  <component :is="tag" class="button" :class="{ button_block: block }" v-bind="$attrs" v-on="$listeners">
+    <slot />
+  </component>
 </template>
 
 <script>
 export default {
   name: 'BaseButton',
+  inheritAttrs: false,
+  props: {
+    block: Boolean,
+    tag: {
+      type:[ Object, String, Function],
+      default: 'button',
+    },
+  },
 };
 </script>
 
