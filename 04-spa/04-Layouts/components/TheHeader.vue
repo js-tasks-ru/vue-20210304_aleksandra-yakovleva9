@@ -2,11 +2,19 @@
   <header class="header">
     <div>
       <h1>
-        <router-link :to="{ name: '/' }" class="router-link-exact-active router-link-active"
-        ><img src="img/logo.svg" alt="Meetups"
-        /></router-link>
+        <router-link :to="{ name: 'index' }">
+          <img src="@/assets/logo.svg" alt="Meetups" />
+        </router-link>
       </h1>
     </div>
+    <nav>
+      <router-link v-if="$route.matched.some((route) => route.meta.showReturnToMeetups)" :to="{ name: 'meetups' }"
+        >&larr; Вернуться к списку</router-link
+      >
+      <router-link :to="{ name: 'meetups' }">Митапы</router-link>
+      <router-link :to="{ name: 'form' }">Создать митап</router-link>
+      <router-link :to="{ name: 'login' }">Вход</router-link>
+    </nav>
   </header>
 </template>
 

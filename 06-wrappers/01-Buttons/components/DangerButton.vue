@@ -8,9 +8,6 @@ export default {
   name: 'DangerButton',
   components: {BaseButton},
   inheritAttrs: false,
-  created() {
-    this.$attrs;
-  },
 };
 </script>
 

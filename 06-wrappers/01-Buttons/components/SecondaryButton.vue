@@ -8,9 +8,6 @@ export default {
   name: 'SecondaryButton',
   components: {BaseButton},
   inheritAttrs: false,
-  created() {
-    this.$attrs;
-  },
 };
 </script>
 
