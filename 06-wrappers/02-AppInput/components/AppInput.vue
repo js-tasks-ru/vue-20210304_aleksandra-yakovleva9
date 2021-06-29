@@ -1,16 +1,59 @@
 <template>
-  <div class="input-group input-group_icon input-group_icon-left input-group_icon-right">
-    <img class="icon" />
-
-    <input ref="" class="form-control form-control_rounded form-control_sm" />
-
-    <img class="icon" />
+  <div
+    class="input-group"
+    :class="{
+      'input-group_icon input-group_icon-left': Boolean($slots['left-icon']),
+      'input-group_icon input-group_icon-right': Boolean($slots['right-icon']),
+    }"
+  >
+    <slot name="left-icon" />
+    <component
+      :is="multiline ? 'textarea' : 'input'"
+      ref="input"
+      v-model="valueWithSetter"
+      class="form-control"
+      v-bind="$attrs"
+      :value.prop="value"
+      :class="{
+        'form-control_sm': small,
+        'form-control_rounded': rounded,
+      }"
+      @input="$emit('input', $event.target.value)"
+      @change="$emit('change', $event.target.value)"
+    />
+    <slot name="right-icon" />
   </div>
 </template>
 
 <script>
 export default {
   name: 'AppInput',
+  inheritAttrs: false,
+  model: {
+    prop: 'value',
+    event: 'input',
+  },
+
+  props: {
+    small: Boolean,
+    rounded: Boolean,
+    multiline: Boolean,
+    value: String,
+  },
+
+  computed: {
+    valueWithSetter: {
+      get() {
+        // Значение в модель = значение параметра модели обёртки
+        return this.value;
+      },
+
+      set(value) {
+        // Изменение значения из модели = порождение события обновления модели обёртки
+        this.$emit('input', value);
+      },
+    },
+  },
 };
 </script>
 
