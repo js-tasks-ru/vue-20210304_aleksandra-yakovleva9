@@ -44,12 +44,10 @@ export default {
   computed: {
     valueWithSetter: {
       get() {
-        // Значение в модель = значение параметра модели обёртки
         return this.value;
       },
 
       set(value) {
-        // Изменение значения из модели = порождение события обновления модели обёртки
         this.$emit('input', value);
       },
     },
